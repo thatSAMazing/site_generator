@@ -1,31 +1,19 @@
-from textnode import TextType, TextNode
 import os
 import shutil
+from copystatic import copy_files_recursive
 
 
-
-def source_to_destination(source,destination):
-	if os.path.exists(destination):
-		shutil.rmtree(destination)
-	if not os.path.isfile(source):
-		os.mkdir(destination)
-	items_in_source = os.listdir(source)
-	for item in items_in_source:
-		if os.path.isfile(f"{source}/{item}"):
-			new_source = f"{source}/{item}"
-			new_destination = f"{destination}/{item}"			
-			shutil.copy(new_source,new_destination)
-		else:
-			new_source = f"{source}/{item}"
-			new_destination = f"{destination}/{item}"
-			source_to_destination(new_source,new_destination)
-	
-	
+dir_path_static = "./static"
+dir_path_public = "./public"
 
 
 def main():
-	source_to_destination("static","public")
-	#git test
+    print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
+
+    print("Copying static files to public directory...")
+    copy_files_recursive(dir_path_static, dir_path_public)
 
 
 if __name__ == "__main__":
