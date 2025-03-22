@@ -25,6 +25,7 @@ def source_to_destination(source,destination):
 
 def main():
 	source_to_destination("static","public")
+	#git test
 
 
 if __name__ == "__main__":
